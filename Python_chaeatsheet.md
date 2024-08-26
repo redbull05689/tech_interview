@@ -51,3 +51,8 @@ with open('logs.txt', 'r') as file:
             break
 ```
 </details>
+<details>
+
+<summary>Lambda</summary>
+
+</details>
