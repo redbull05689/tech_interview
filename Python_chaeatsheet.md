@@ -27,6 +27,7 @@ print(issubclass(Cat, Pet)) #issubclass, проверяет, является л
 ```
 У каждого метода должен быть как минимум один аргумент и называть этот аргумент принято словом self
 </details>
+
 <details>
 <summary>File</summary>
 
