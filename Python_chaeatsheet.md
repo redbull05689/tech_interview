@@ -56,3 +56,10 @@ with open('logs.txt', 'r') as file:
 <summary>Lambda</summary>
 
 </details>
+
+</details>
+<details>
+
+<summary>Functions</summary>
+
+</details>
