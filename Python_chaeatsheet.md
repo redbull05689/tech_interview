@@ -61,5 +61,25 @@ with open('logs.txt', 'r') as file:
 <details>
 
 <summary>Functions</summary>
+*args
+*args позволяет передавать переменное количество позиционных аргументов в функцию. На практике это означает, что вы можете передать любое количество аргументов в функцию, и они будут упакованы в кортеж. Например:
+```
+def my_function(*args):
+    for arg in args:
+        print(arg)
 
+my_function(1, 2, 3)
+```
+
+**kwargs
+**kwargs позволяет передавать переменное количество именованных (ключевых) аргументов в функцию. Эти аргументы будут упакованы в словарь. Например:
+
+```
+def my_function(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+my_function(name="Alice", age=30, city="New York")
+```
+Здесь kwargs будет словарем {'name': 'Alice', 'age': 30, 'city': 'New York'}, и функция распечатает каждый ключ-значение.
 </details>
