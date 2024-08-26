@@ -29,7 +29,8 @@ print(issubclass(Cat, Pet)) #issubclass, проверяет, является л
 </details>
 
 <details>
-<summary>File</summary>
+
+<summary>Files</summary>
 
 Открываем файл логов для чтения
 
