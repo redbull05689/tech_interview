@@ -29,8 +29,10 @@ print(issubclass(Cat, Pet)) #issubclass, проверяет, является л
 </details>
 <details>
 <summary>File</summary>
+
+#Открываем файл логов для чтения
+
 ```
-# Открываем файл логов для чтения
 with open('logs.txt', 'r') as file:
     for line in file:
         # Удаляем лишние пробелы в начале и конце строки
