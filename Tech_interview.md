@@ -259,7 +259,8 @@ Add the identity number of this role to the k8s service account as annotation an
 
 Role —  который описывает некий набор прав на объекты кластера Kubernetes. Role ничего и никому не разрешает. Это просто список.
 RoleBinding -
-User -
+ServiceAccount -
+Пример: kubectl auth can-i get pods --as <serviceaccount> -n <namespace>
 
 1. Liveness Probe используется для определения необходимости перезапуска контейнера.
 2. Readiness Probe используется для определения готовности контейнера принимать трафик.
