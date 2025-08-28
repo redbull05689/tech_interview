@@ -28,6 +28,8 @@
 
 **SASE** - концепция безопасного доступа к ресурсаам SECURE ACCESS SERVICE EDGE
 
+**CVSS** - Common Vulnerability Scoring System ,шкала от 0 до 10, которая показывает, насколько опасна уязвимость
+
 </details>
 <details>
 <summary>Что я реализовал</summary>
