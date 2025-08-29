@@ -104,12 +104,10 @@ https://open-docs.neuvector.com/basics/requirements/
 DefectDojo как раз решает эту задачу. Он умеет импортировать результаты разных сканеров, нормализовать их, а затем дедуплицировать находки по CWE/CVE/endpoint. Например, если SAST нашёл XSS, а DAST её подтвердил, в DefectDojo это будет одна уязвимость с несколькими источниками подтверждения.
 
 #### Примеры практик по моделированю угроз ####
-- STRIDE-анализ
-Классификация угроз по шести категориям: Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege.
+- STRIDE-анализ. Классификация угроз по шести категориям: Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege.
 Применяется для анализа архитектуры приложения или инфраструктуры.
 
-- PASTA (Process for Attack Simulation and Threat Analysis)
-7-этапный процесс: от бизнес-контекста до технических уязвимостей и моделирования атак.
+- PASTA (Process for Attack Simulation and Threat Analysis). 7-этапный процесс: от бизнес-контекста до технических уязвимостей и моделирования атак.
 Хорошо подходит для систем с высокой степенью регуляции и сложной бизнес-логикой.
 
 #### Недостаток механизма docker in docker при использовании в пайплайнах ####
