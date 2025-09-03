@@ -141,6 +141,33 @@ Garbage collector - одна из форм автоматического упр
 
 Load average — это показатель, который используется для отображения средней нагрузки на систему за определенные периоды времени. Он указывает на количество активных процессов, которые либо выполняются, либо ожидают выполнения на процессоре.
 
+51. Как проходит процесс загрузки linux
+
+52. Какие уровни абстрации у LVM
+
+53. Лимиты пользователя в linux ulimit
+
+54. Заголовки TCP пакетов
+	SYN
+	ACK
+	FYN
+	WAIT
+	RST
+	RJCT
+	CLOSE
+
+55. Что такое ретраснмишн?
+
+56. Что такое traceroute и как отрислвывает хосты черех которые прошел пакет?
+
+57. Какие виды NAT (SNAT, DNAT)?
+
+58. Что происход при curl ifconfig.io (максимально детально)
+
+59.
+
+
+
 </details>
 
 <details>
@@ -226,6 +253,15 @@ Cетевые драйверы docker
 - macvlan: сети Macvlan позволяют присваивать контейнеру MAC-адрес, благодаря чему он выглядит как физическое устройство в сети.
 
 Docker многостадийная сборка (multi-stage build) — это методика сборки образов Docker, которая позволяет создавать более легкие и оптимизированные образы с помощью нескольких этапов сборки в одном Dockerfile. Это особенно полезно для создания минимальных продакшн образов, содержащих только необходимое программное обеспечение и зависимости, без лишних файлов, которые были нужны только на этапе сборки или тестирования.
+
+Как уменьшить размер docker образа?
+	1. Выбор базового образа, например alpine
+	2. Минималтзвация установленных зависимостей
+	3. Multi-stage build
+	4. Почистить каталог /var
+	5. Минималищировать количесво слоев
+		Слой = snapshot файловой системы после выполнения инструкции.
+		Docker использует UnionFS (OverlayFS/aufs) для объединения слоёв.
 
 </details>
 
@@ -324,10 +360,36 @@ LimitRange - Ограничивает минимальные и максимал
 
 ResourceQuota - Ограничивает общее использование ресурсов в namespace . То есть, сколько всего может быть выделено ресурсов всем Pod'ам в рамках одного namespace.
 
+Какие виды контейнеров бывают в поде?
+	- init
+	- sidecar
+
+statefullset VS deployment?
+
+Типы сервисов в k8s(4):
+-ClusterIP
+-NodePort
+-LoadBalancer
+
+Какие механизмы безопасности есть в k8s?
+	RBAC
+	Network Policies
+	TLS в etcd и API-server (защита трафика между компонентами кластера)
+	SecurityContext — настройка прав пода/контейнера (uid/gid, readOnlyRootFilesystem, drop capabilities).
+	Pod Security Standards (PSS, пришли на смену PodSecurityPolicy) - запреты на запуск подов с root-правами, привилегированными capability, hostPID/hostNetwork и т.д.
+
+Что произрйдет с контейнером если он превысит потребление CPU?
+
+Что такое ingress?
+
+В чем преимущество использования ингресса против сервиса при обращение прилодений в рамках одного кластера к друг другу?
+
+
+
 **Questions**
 -  Какие вопросы вы зададите разработчику, когда он приносит код для деплоя в Kubernetes?
 - Какие kubernetes-объекты используете для деплоя stateful приложения?
-- Как диагностировать задержки между двумя кластерами с раздельными БД и приложениями? 
+- Как диагностировать задержки между двумя кластерами с раздельными БД и приложениями?
 ```sh
 У каждого приложения есть своя база ранных. Эти приложенияя общаются через интеренет по https. С первого кластера приложение отправляяет во второе приложение, там приложение записывает в базу, отсылает ответ и первый записывает в свою базу, Этот раунд длятся 400 милисекунд, но бывают задержки 3 секунды. Куда смотреть?
 ```
@@ -358,13 +420,13 @@ AWS System manager - is a secure end-to-end management solution for resources on
 
 Availability zone
 
-VPC -
+VPC - виртуальная частная сеть или изолированный сегмент
 
-nat gateway -
+- Nat gateway - Позволяет ресурсам из private subnet выходить в интернет только для исходящего трафика
 
-internet gateway -
+- Internet gateway - Позволяет ресурсам с публичным IP адресом принимать входящие соединения, наприемр Elastic LB. Оплата только за трафик.
 
-Security groups - firewall at the instance level
+- Security groups - firewall at the instance level
 acts as a firewall that controls the traffic allowed to and from the resources in your virtual private cloud (VPC). You can choose the ports and protocols to allow for inbound traffic and for outbound traffic.
 - Security groups are stateful. For example, if you send a request from an instance, the response traffic for that request is allowed to reach the instance regardless of the inbound security group rules. Responses to allowed inbound traffic are allowed to leave the instance, regardless of the outbound rules.
 
@@ -405,7 +467,7 @@ Route53
 VPC
 VPC -->  add subnets --> create Rote table --> create NACL --> associate subnets with route tables
 
-VPC endpoint with accaes to S3
+VPC endpoint with acces to S3
 Launch EC2 --> Create Vpc endpoint for S3 --> Review route table
 
 S3
@@ -442,6 +504,26 @@ Volume Gateway (Cached mode) - Your entire dataset is stored in S3 (only frequen
 
 security group - фильтрует трафик на уровне инстанса
 NACL - фильтркет трафик на уровне подсети
+
+---
+
+AWS cloudwatch
+- Logs
+- insights
+- Metrics
+- Log stream
+- Log groups
+- Log archival
+
+может пересылать логи в S3 Opensearch Lambda kinesis
+
+AWS Cloudtrail - сервис для аудит API вызовыв
+
+X-RAY -
+
+Network Monitor -
+
+
 </details>
 
 
