@@ -420,13 +420,13 @@ AWS System manager - is a secure end-to-end management solution for resources on
 
 Availability zone
 
-VPC -
+VPC - виртуальная частная сеть или изолированный сегмент
 
-nat gateway -
+- Nat gateway - Позволяет ресурсам из private subnet выходить в интернет только для исходящего трафика
 
-internet gateway -
+- Internet gateway - Позволяет ресурсам с публичным IP адресом принимать входящие соединения, наприемр Elastic LB. Оплата только за трафик.
 
-Security groups - firewall at the instance level
+- Security groups - firewall at the instance level
 acts as a firewall that controls the traffic allowed to and from the resources in your virtual private cloud (VPC). You can choose the ports and protocols to allow for inbound traffic and for outbound traffic.
 - Security groups are stateful. For example, if you send a request from an instance, the response traffic for that request is allowed to reach the instance regardless of the inbound security group rules. Responses to allowed inbound traffic are allowed to leave the instance, regardless of the outbound rules.
 
@@ -467,7 +467,7 @@ Route53
 VPC
 VPC -->  add subnets --> create Rote table --> create NACL --> associate subnets with route tables
 
-VPC endpoint with accaes to S3
+VPC endpoint with acces to S3
 Launch EC2 --> Create Vpc endpoint for S3 --> Review route table
 
 S3
@@ -504,6 +504,26 @@ Volume Gateway (Cached mode) - Your entire dataset is stored in S3 (only frequen
 
 security group - фильтрует трафик на уровне инстанса
 NACL - фильтркет трафик на уровне подсети
+
+---
+
+AWS cloudwatch
+- Logs
+- insights
+- Metrics
+- Log stream
+- Log groups
+- Log archival
+
+может пересылать логи в S3 Opensearch Lambda kinesis
+
+AWS Cloudtrail - сервис для аудит API вызовыв
+
+X-RAY -
+
+Network Monitor -
+
+
 </details>
 
 
