@@ -444,6 +444,39 @@ network ACL  - Список управления доступом к сети (A
 Site-to-Site VPN -  connection between remote devices and AWS resources. Virtual Private Gateway --> IPSEC --> Customer gateway (on-premise network)
 Network ACLs are stateless, which means that return traffic must be explicitly allowed by the rules.
 
+- External Ingress
+
+Доступен из интернета.
+Для него создаётся Internet-facing Load Balancer.
+
+Используется, когда нужно отдавать сервисы/приложения наружу (например, API, веб-приложение).
+
+В AWS ALB это означает:
+scheme: internet-facing
+Security Group разрешает входящий трафик с 0.0.0.0/0 (или с ограничений).
+Пример аннотации для Kubernetes Ingress:
+
+```annotations:
+  alb.ingress.kubernetes.io/scheme: internet-facing```
+
+2. Internal Ingress
+
+Доступен только внутри VPC (или через VPN/Direct Connect/PrivateLink).
+Для него создаётся Internal Load Balancer.
+Используется для внутренних микросервисов, админских панелей, сервисов, к которым не нужен публичный доступ.
+
+В AWS ALB это означает:
+
+scheme: internal
+
+Security Group обычно ограничивает доступ только из корпоративных сетей или из подсетей VPC.
+
+Пример аннотации:
+
+```annotations:
+  alb.ingress.kubernetes.io/scheme: internal```
+
+
 Direct connect - directly connect to AWS data center without internet
 
 AWS Private link - Establish connectivity between VPCs and AWS services without exposing data to the internet
@@ -657,7 +690,7 @@ CORS - служит для того, чтобы например регуоир�
 ```
 Сетевой фундамент (VPC, сабнеты, маршруты)
 
-VPC
+- VPC
 
 CIDR: например, 10.0.0.0/16.
 
@@ -690,7 +723,8 @@ Security Groups
 Создание кластера
 Используем модуль terraform-aws-eks.
 
-Указываем private subnets для нод.
+Указываем VPC ID
+Указываем private subnets для нод(важно: control plane общается с воркерами через них).
 Control Plane — managed by AWS (highly available across AZ).
 Worker Nodes
 Managed Node Groups (обычно on-demand).
@@ -703,9 +737,11 @@ CNI: AWS VPC CNI (каждый pod получает IP из сабнета).
 Поддержка pod density зависит от выбранных типов инстансов и /26-/28 блоков в сабнетах.
 Можно добавить Calico, если нужна NetworkPolicy.
 
-IAM + RBAC
+- IAM + RBAC
 
 OIDC provider для EKS (нужен для IRSA — IAM Role for ServiceAccount).
+Чтобы сервис-аккаунты могли получать IAM роли (IRSA).
+Это позволяет подам напрямую работать с AWS сервисами (S3, Secrets Manager, DynamoDB и т.д.).
 Привязываем роли к k8s сервис-аккаунтам (например, pod в k8s может читать S3 или секреты в Secrets Manager).
 Add-ons (сразу через Terraform или Helm)
 vpc-cni
@@ -722,6 +758,8 @@ ingress controller (nginx или AWS Load Balancer Controller).
 Cloudflare → ALB (ingress) в public subnet.
 
 ALB → EKS pods (через сервис типа LoadBalancer/Ingress).
+
+Для админки был выбрал ingress типа internal
 
 Pods сидят в private subnet, имеют выход в интернет через NAT Gateway (например, для скачивания образов).
 
