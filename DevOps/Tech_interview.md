@@ -413,7 +413,6 @@ null_resource является ресурсом , который позволя�
 
 </details>
 
-
 <details>
 <summary>AWS</summary>
 
@@ -501,7 +500,7 @@ Route53
 	Latency based - Route traffic based on the based latency to provide good performance
 	Multivalue Answers - Enable Route53 to respond with up to end to eight selected at random (Round-robin)
 	Weighted - Route traffic to multiple resources based on a numerical weight
----
+
 VPC
 VPC -->  add subnets --> create Rote table --> create NACL --> associate subnets with route tables
 
@@ -561,10 +560,7 @@ X-RAY -
 
 Network Monitor -
 
-
 </details>
-
-
 
 
 <details>
@@ -625,6 +621,7 @@ Network Monitor -
 Тестирование локализации (Localization Testing):
 Проверка адаптации приложения для различных регионов и языков.
 Включает проверку правильности перевода, форматов даты и времени, валют и других региональных особенностей.
+
 </details>
 
 <details>
