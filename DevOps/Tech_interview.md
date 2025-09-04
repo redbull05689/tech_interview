@@ -455,8 +455,10 @@ scheme: internet-facing
 Security Group разрешает входящий трафик с 0.0.0.0/0 (или с ограничений).
 Пример аннотации для Kubernetes Ingress:
 
-```annotations:
-  alb.ingress.kubernetes.io/scheme: internet-facing```
+```
+annotations:
+  alb.ingress.kubernetes.io/scheme: internet-facing
+```
 
 2. Internal Ingress
 
@@ -472,8 +474,10 @@ Security Group обычно ограничивает доступ только �
 
 Пример аннотации:
 
-```annotations:
-  alb.ingress.kubernetes.io/scheme: internal```
+```
+annotations:
+  alb.ingress.kubernetes.io/scheme: internal
+```
 
 
 Direct connect - directly connect to AWS data center without internet
