@@ -353,6 +353,8 @@ Kubernetes генерирует событие, указывающее, что �
 Можно также использовать инструменты мониторинга, такие как Prometheus, для наблюдения за потреблением памяти и другими метриками в кластере.
 Таким образом, OOM Killer играет важную роль в управлении памятью и обеспечении стабильности узлов в Kubernetes, но требует внимательной настройки ресурсов для контейнеров, чтобы избежать нежелательных завершений и перезапусков.
 ```
+Throtling in Kubernetes:
+
 
 В Kubernetes LimitRange и ResourceQuota — это механизмы, которые позволяют ограничивать использование ресурсов (CPU, память) в namespace'ах , чтобы предотвратить чрезмерное потребление ресурсов и обеспечить стабильность кластера.
 
@@ -366,6 +368,7 @@ ResourceQuota - Ограничивает общее использование �
 
 statefullset VS deployment?
 
+
 Типы сервисов в k8s(4):
 -ClusterIP
 -NodePort
@@ -374,7 +377,6 @@ statefullset VS deployment?
 Какие механизмы безопасности есть в k8s?
 	RBAC
 	Network Policies
-	TLS в etcd и API-server (защита трафика между компонентами кластера)
 	SecurityContext — настройка прав пода/контейнера (uid/gid, readOnlyRootFilesystem, drop capabilities).
 	Pod Security Standards (PSS, пришли на смену PodSecurityPolicy) - запреты на запуск подов с root-правами, привилегированными capability, hostPID/hostNetwork и т.д.
 
@@ -387,7 +389,7 @@ statefullset VS deployment?
 
 
 **Questions**
--  Какие вопросы вы зададите разработчику, когда он приносит код для деплоя в Kubernetes?
+- Какие вопросы вы зададите разработчику, когда он приносит код для деплоя в Kubernetes?
 - Какие kubernetes-объекты используете для деплоя stateful приложения?
 - Как диагностировать задержки между двумя кластерами с раздельными БД и приложениями?
 ```sh
@@ -419,6 +421,9 @@ null_resource является ресурсом , который позволя�
 AWS System manager - is a secure end-to-end management solution for resources on AWS and in multi-cloud and hybrid environments
 
 Availability zone
+- Region (регион) – это географическая область (например, us-east-1 – Вирджиния, США).
+- Availability Zone (зона доступности) – это один из дата-центров внутри региона, имеющий независимое электропитание, сеть и охлаждение.
+- В каждом регионе обычно есть минимум 2–3 зоны доступности (например: us-east-1a, us-east-1b, us-east-1c).
 
 VPC - виртуальная частная сеть или изолированный сегмент
 
@@ -428,8 +433,8 @@ VPC - виртуальная частная сеть или изолирован
 
 - Security groups - firewall at the instance level
 acts as a firewall that controls the traffic allowed to and from the resources in your virtual private cloud (VPC). You can choose the ports and protocols to allow for inbound traffic and for outbound traffic.
-- Security groups are stateful. For example, if you send a request from an instance, the response traffic for that request is allowed to reach the instance regardless of the inbound security group rules. Responses to allowed inbound traffic are allowed to leave the instance, regardless of the outbound rules.
 
+- Security groups are stateful. For example, if you send a request from an instance, the response traffic for that request is allowed to reach the instance regardless of the inbound security group rules. Responses to allowed inbound traffic are allowed to leave the instance, regardless of the outbound rules.
 
 network ACL  - Список управления доступом к сети (ACL) разрешает или запрещает определенный входящий или исходящий трафик на уровне подсети.
 	Default network ACL - allows all inbound traffic
@@ -443,7 +448,7 @@ Direct connect - directly connect to AWS data center without internet
 
 AWS Private link - Establish connectivity between VPCs and AWS services without exposing data to the internet
 
-Athena -  серви запросов, похожий на SQL
+Athena -  сервис запросов, похожий на SQL
 
 Amazon OpenSearch Service makes it easy for you to perform interactive log analytics,
 
