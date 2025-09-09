@@ -34,7 +34,6 @@
 
 **CVSS** - Common Vulnerability Scoring System ,шкала от 0 до 10, которая показывает, насколько опасна уязвимость
 
-**SOP** - same origin policy умправление заголовками (XSS)
 </details>
 
 <details>
@@ -324,9 +323,13 @@ Privacy: соблюдение правил конфиденциальности.
 
 <details>
 <summary>Vulnerabilities</summary>
-XSS
-CSRF
-SQL
+**XSS**
+SOP- same origin policy умправление заголовками (XSS)
+
+**CSRF**
+
+**SQL injection**
+
 </details>
 
 <details>
