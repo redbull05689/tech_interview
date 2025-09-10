@@ -574,82 +574,82 @@ statefullset VS deployment?
 **Q:** Terraform vs Ansible/Chef/Puppet?<br>
 **A:** Terraform — управление инфраструктурой; Ansible/Puppet — конфигурация существующих ресурсов.
 
-**Q:** Что такое state-файл (`terraform.tfstate`)?
+**Q:** Что такое state-файл (`terraform.tfstate`)?<br>
 **A:** Хранит текущее состояние ресурсов, позволяет Terraform понять, что создавать, менять или удалять.
 
-**Q:** Разница между `plan` и `apply`?
+**Q:** Разница между `plan` и `apply`?<br>
 **A:** `plan` — показывает изменения; `apply` — применяет их.
 
 ---
 
 ## 2️⃣ Ресурсы и зависимости
 
-**Q:** Что такое resource, data source, module?
+**Q:** Что такое resource, data source, module?<br>
 **A:**
 - `resource` — создаёт объект инфраструктуры.
 - `data source` — получает существующие данные.
 - `module` — переиспользуемый блок конфигурации.
 
-**Q:** Как управлять зависимостями между ресурсами?
+**Q:** Как управлять зависимостями между ресурсами?<br>
 **A:** Через `depends_on` или использование атрибутов одного ресурса в другом.
 
-**Q:** Что такое provisioners?
+**Q:** Что такое provisioners?<br>
 **A:** Скрипты, выполняемые после создания ресурса (`remote-exec`, `local-exec`). Рекомендуется использовать редко.
 
 ---
 
 ## 3️⃣ State и Backend
 
-**Q:** Типы backend?
+**Q:** Типы backend?<br>
 **A:** `local` (локальный), `remote` (S3, GCS, Terraform Cloud, Azure Storage, Consul).
 
-**Q:** Зачем нужен locking?
+**Q:** Зачем нужен locking?<br>
 **A:** Чтобы несколько человек/процессов не меняли состояние одновременно.
 
-**Q:** Как хранить секреты в Terraform?
+**Q:** Как хранить секреты в Terraform?<br>
 **A:** Через env variables (`TF_VAR_...`), Vault, AWS Secrets Manager, SSM Parameter Store.
 
 ---
 
 ## 4️⃣ Модули
 
-**Q:** Что такое Terraform Module?
+**Q:** Что такое Terraform Module?<br>
 **A:** Переиспользуемая конфигурация, локальная или из registry.
 
-**Q:** Разница root vs child module?
+**Q:** Разница root vs child module?<br>
 **A:** Root — основной конфиг; Child — импортируется в root.
 
-**Q:** Как передавать переменные в module?
+**Q:** Как передавать переменные в module?<br>
 **A:** Через `variables` в module и `module.<name>.<var>` в root.
 
 ---
 
 ## 5️⃣ Переменные и output
 
-**Q:** Типы переменных?
+**Q:** Типы переменных?<br>
 **A:** string, number, bool, list, map, set, object, tuple.
 
-**Q:** Зачем output?
+**Q:** Зачем output?<br>
 **A:** Возвращает значения из module или конфигурации для использования в других ресурсах или CI/CD.
 
 ---
 
 ## 6️⃣ Провайдеры и версии
 
-**Q:** Что такое provider?
+**Q:** Что такое provider?<br>
 **A:** Плагин, позволяющий Terraform работать с конкретной платформой (AWS, Azure, GCP, Kubernetes).
 
-**Q:** Как ограничить версию Terraform и провайдера?
+**Q:** Как ограничить версию Terraform и провайдера?<br>
 **A:** В `required_version` и `required_providers`.
 
 ---
 
 ## 7️⃣ Работа с инфраструктурой
 
-**Q:** Что такое immutable infrastructure?
+**Q:** Что такое immutable infrastructure?<br>
 **A:** Каждое обновление создаёт новые ресурсы вместо изменения существующих → минимизация downtime.
 
-**Q:** `taint` и `import`?
+**Q:** `taint` и `import`?<br>
 **A:**
 - `terraform taint <resource>` — пометить ресурс на пересоздание.
 - `terraform import` — импорт существующего ресурса в state.
@@ -658,22 +658,22 @@ statefullset VS deployment?
 
 ## 8️⃣ Advanced / практические
 
-**Q:** Разница между `count`, `for_each`, `dynamic block`?
+**Q:** Разница между `count`, `for_each`, `dynamic block`?<br>
 **A:**
 - `count` — повторение ресурса N раз.
 - `for_each` — создание ресурсов на основе списка или карты с ключами.
 - `dynamic block` — динамическая генерация вложенных блоков.
 
-**Q:** Как защитить ресурсы от удаления?
+**Q:** Как защитить ресурсы от удаления?<br>
 **A:** `lifecycle { prevent_destroy = true }`, `ignore_changes` для атрибутов.
 
-**Q:** CI/CD с Terraform?
+**Q:** CI/CD с Terraform?<br>
 **A:** `plan` → ревью → `apply`. Через GitHub Actions, GitLab CI/CD, Terraform Cloud/Enterprise.
 
-**Q:** Отладка ошибок?
+**Q:** Отладка ошибок?<br>
 **A:** `TF_LOG=DEBUG terraform apply`, `terraform validate`, `terraform fmt`, проверка state и зависимостей.
 
-**Q:** Что такое null ресурс?
+**Q:** Что такое null ресурс?<br>
 **A:** null_resource является ресурсом , который позволяет настроить provisioners, которые непосредственно не связаны с одним существующим ресурсом.
 ---
 
