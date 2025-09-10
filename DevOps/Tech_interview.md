@@ -566,12 +566,6 @@ statefullset VS deployment?
 <details>
 <summary>Terraform</summary>
 
-
-
-# 🌐 Terraform Interview Cheat Sheet
-
----
-
 ## 1️⃣ Общие вопросы
 
 **Q:** Что такое Terraform?
