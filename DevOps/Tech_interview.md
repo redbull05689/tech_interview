@@ -568,10 +568,10 @@ statefullset VS deployment?
 
 ## 1️⃣ Общие вопросы
 
-**Q:** Что такое Terraform?
+**Q:** Что такое Terraform?<br>
 **A:** IaC-инструмент для создания, изменения и управления инфраструктурой безопасно и предсказуемо.
 
-**Q:** Terraform vs Ansible/Chef/Puppet?
+**Q:** Terraform vs Ansible/Chef/Puppet?<br>
 **A:** Terraform — управление инфраструктурой; Ansible/Puppet — конфигурация существующих ресурсов.
 
 **Q:** Что такое state-файл (`terraform.tfstate`)?
