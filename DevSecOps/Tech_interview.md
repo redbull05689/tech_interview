@@ -34,6 +34,8 @@
 
 **CVSS** - Common Vulnerability Scoring System ,шкала от 0 до 10, которая показывает, насколько опасна уязвимость
 
+**Hardening** - 
+
 </details>
 
 <details>
