@@ -1,15 +1,14 @@
 
 <details>
 <summary>Linux</summary>
-Hard link vs soft link
-A hard link is a file all its own, and the file references or points to the exact spot on a hard drive where the Inode stores the data.
+**Q:** Hard link vs soft link<br>
+**A:** A hard link is a file all its own, and the file references or points to the exact spot on a hard drive where the Inode stores the data.
 A soft link isn't a separate file, it points to the name of the original file, rather than to a spot on the hard drive.
-
 а) Жесткая ссылка не может быть создана для каталогов. Жесткая ссылка может быть создана только для файла.
 б) Символические ссылки или симлинки могут ссылаться на каталог.
 
-что в Линукс отвечает за открытие файлов?
-
+**Q:** что в Линукс отвечает за открытие файлов?<br>
+**A:**
 - Inode
 inode  или индексный дескриптор — это структура данных в которой хранится метаинформация о стандартных файлах, каталогах или других объектах файловой системы, кроме непосредственно данных и имени.
 Ну то есть , грубо говоря, что на 1 файл или директорию тратится 1 inode
@@ -702,6 +701,19 @@ statefullset VS deployment?
 </details>
 
 <details>
+<summary>Брокеры</summary>
+
+smth
+
+</details>
+<details>
+<summary>Базы данных</summary>
+
+smth
+
+</details>
+
+<details>
 <summary>AWS</summary>
 
 
@@ -856,6 +868,12 @@ Network Monitor -
 
 
 <details>
+<details>
+<summary>Cloudflare</summary>
+
+smth
+
+</details>
 <summary>Виды тестов</summary>
 виды тестов:
 Юнит-тестирование (Unit Testing):
