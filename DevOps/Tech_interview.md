@@ -869,7 +869,11 @@ Network Monitor -
 
 AWS waff -
 
-AWS Shield - 
+AWS Shield -
+
+AWS Guardduty - 
+
+AWS Flowlogs -
 
 </details>
 
