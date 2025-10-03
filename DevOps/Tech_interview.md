@@ -863,17 +863,25 @@ AWS cloudwatch
 
 AWS Cloudtrail - сервис для аудит API вызовыв
 
-X-RAY -
+AWS X-RAY -
 
-Network Monitor -
+AWS Network Monitor -
 
-AWS waff -
+AWS Firewall manager - mangement account level
 
-AWS Shield -
+AWS WAFF -
 
-AWS Guardduty - 
+AWS Shield - 3 and 4 OSI level (SYN UDP flood)
+
+AWS Guardduty -
 
 AWS Flowlogs -
+
+AWS Inspector - Agent-based and Agent-less scanning (Snapshot)
+
+AWS Security hub -
+
+AWS Macie - 
 
 </details>
 
