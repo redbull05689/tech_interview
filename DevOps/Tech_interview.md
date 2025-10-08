@@ -587,6 +587,38 @@ statefullset VS deployment?
 **Q:** Разница между `plan` и `apply`?<br>
 **A:** `plan` — показывает изменения; `apply` — применяет их.
 
+**Q** Как сделать чтобы из одного ресурса было сразу несолько и тег чтобы тоже разный был
+**A**
+```
+provider "aws" {
+  region = "ap-south-1"
+}
+variable "instance_types" {
+  description = "Map of instance types with properties"
+  type = map(object({
+    instance_type    = string
+    subnet_id        = string
+    availability_zone = string
+  }))
+  default = {
+    "instance1" = {
+      instance_type    = "t2.medium"
+      subnet_id        = "subnet-0b9bf47f2dd51a793"
+      availability_zone = "ap-south-1a"
+    },
+    "instance2" = {
+      instance_type    = "t2.micro"
+      subnet_id        = "subnet-095f35df6f4711c19"
+      availability_zone = "ap-south-1b"
+    },
+    "instance3" = {
+      instance_type    = "t2.small"
+      subnet_id        = "subnet-095f35df6f4711c19"
+      availability_zone = "ap-south-1b"
+    }
+  }
+}
+```
 ---
 
 ## 2️⃣ Ресурсы и зависимости
@@ -706,6 +738,22 @@ statefullset VS deployment?
 | **Клиентские языки**  | Python, C#, Java, JavaScript, C, C++ и др. | Python, Ruby, Java, JavaScript | RabbitMQ для широкого выбора SDK, Kafka чаще для систем на Java/Scala |
 | **Роутинг сообщений** | Гибкая маршрутизация (exchanges, queues) | Роутинг есть, но базовый | RabbitMQ для сложной логики доставки, Kafka для простого pub/sub |
 | **Приоритеты**        | Поддерживаются приоритетные сообщения | Не поддерживаются | RabbitMQ для систем, где важно управлять очередностью, Kafka для равноправного стриминга событий |
+
+### Exchange
+| Exchange Type  | Routing Logic                        | Use Case             |
+|----------------|--------------------------------------|----------------------|
+| **Direct**     | Exact match of routing key            | Unicast / Task queue |
+| **Fanout**     | Broadcast to all bound queues         | Pub/Sub / Broadcast  |
+| **Topic**      | Pattern match with `*` and `#`       | Event categorization |
+| **Headers**    | Match on message headers              | Metadata routing     |
+
+
+### Queues
+| Queue Type           | Durability | Replication | Use Case                        |
+|----------------------|------------|-------------|---------------------------------|
+| **Classic**          | Optional   | With mirroring | General purpose, simple workloads |
+| **Quorum**           | Yes        | Raft (multi-node) | Reliable HA, transactions, safety |
+| **Stream**           | Yes        | Replicated   | Event streaming, analytics, replay |
 
 
 </details>
@@ -881,7 +929,7 @@ AWS Inspector - Agent-based and Agent-less scanning (Snapshot)
 
 AWS Security hub -
 
-AWS Macie - 
+AWS Macie -
 
 </details>
 
