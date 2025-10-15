@@ -34,7 +34,7 @@
 
 **CVSS** - Common Vulnerability Scoring System ,шкала от 0 до 10, которая показывает, насколько опасна уязвимость
 
-**Hardening** - 
+**Hardening** -
 
 </details>
 
@@ -114,7 +114,20 @@ DefectDojo как раз решает эту задачу. Он умеет им�
 #### Примеры практик по моделированю угроз ####
 - STRIDE-анализ. Классификация угроз по шести категориям: Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege.
 Применяется для анализа архитектуры приложения или инфраструктуры.
+```
+- Spoofing (подделка идентичности) например, подделка запросов к API
 
+- Tampering (манипуляция данными) SQL-инъекция, которая изменяет данные в БД
+
+ - Repudiation (отказ от совершённого действия, когда не может быть прозрачно доказано, кто сделал что) Логи без привязки к идентификатору пользователя или часы не синхронизированы между микросераисами
+
+- Information Disclosure (разглашение информации) Утечка секретов в логах или неправильные ACL на S3
+
+- Denial of Service (отказ в обслуживании) - HTTP Flood / API Abuse — массовые запросы на эндпоинты
+    или заполнение очередей сообщений
+
+- Elevation of Privilege (эскалация привилегий) - Неправильная настройка RBAC или возвоэность выполнить команду c sudo привилегиями
+```
 - PASTA (Process for Attack Simulation and Threat Analysis). 7-этапный процесс: от бизнес-контекста до технических уязвимостей и моделирования атак.
 Хорошо подходит для систем с высокой степенью регуляции и сложной бизнес-логикой.
 
@@ -325,10 +338,13 @@ Privacy: соблюдение правил конфиденциальности.
 
 <details>
 <summary>Vulnerabilities</summary>
+
 **XSS**
 SOP- same origin policy умправление заголовками (XSS)
 
 **CSRF**
+Cross Site Request Forgery
+Explits the users authentificated sessions
 
 **SQL injection**
 
