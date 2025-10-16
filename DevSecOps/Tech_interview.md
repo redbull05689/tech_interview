@@ -353,7 +353,7 @@ Explits the users authentificated sessions
 <details>
 <summary>QA</summary>
 
-**Q:** Какие виды инъекций знаете?
+**Q:** Какие виды инъекций знаете? </br>
 **А:** XSS, SQLi, NOSQLi, command/os injection
 <details>
 <summary>Виды инъекций</summary>
