@@ -354,8 +354,8 @@ Explits the users authentificated sessions
 <summary>QA</summary>
 
 **Q:** Какие виды инъекций знаете?
-**А:**
-<details>XSS, SQLi, NOSQLi, command/os injection
+**А:** XSS, SQLi, NOSQLi, command/os injection
+<details>
 <summary>Виды инъекций</summary>
 - SQL Injection(SQLi) - внедрение SQL-кода к базе
 
