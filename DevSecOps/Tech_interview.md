@@ -145,7 +145,7 @@ DefectDojo как раз решает эту задачу. Он умеет им�
 
 Каналы: war-room (чат/мост), шаблоны тикетов, плейбуки по типам инцидентов (утечка секретов, supply-chain, RCE, DoS, компрометация контейнера и т.д.).
 
-Источники данных: SIEM, EDR, WAF, k8s audit, cloud trails, Git/CI logs, registry/artifact repo, SBOM, секрет-менеджер.
+Источники данных: SIEM, EDR, WAF, k8s audit, cloud trails, Git или CI/CD logs, registry/artifact repo, SBOM, секрет-менеджер.
 
 Политики: сбор и хранение логов, цепочка хранения доказательств, требования регуляторов.
 
@@ -241,7 +241,7 @@ CI/CD: обязательные гейты (SAST/SCA/secret scan, IaC-прове
 
 Чек-лист доказательств: k8s audit, cloud trails, Git/PR/CI, registry, WAF/IDS, EDR, системные логи, секрет-менеджер.
 
-Критерии «Done»: SEV↓, IOC=0, ротации завершены, фикс в проде, мониторинг/алерты обновлены, пост-мортем опубликован.
+Критерии «Done»: SEV , IOC=0, ротации завершены, фикс в проде, мониторинг/алерты обновлены, пост-мортем опубликован.
 
 Метрики для бизнеса и качества процесса
 
@@ -351,8 +351,22 @@ Explits the users authentificated sessions
 </details>
 
 <details>
-<summary>another point</summary>
+<summary>QA</summary>
 
-smth
+**Q:** Какие виды инъекций знаете?
+**А:**
+<details>XSS, SQLi, NOSQLi, command/os injection
+<summary>Виды инъекций</summary>
+- SQL Injection(SQLi) - внедрение SQL-кода к базе
 
+- NoSQL injection- инъекции для NoSQL БД (MongoDB).
+
+- Command/OS injection - выполнение команд операционной системы через вызовы (например, system() / exec).
+
+- Server-Side Template Injection (SSTI) — внедрение кода в какой-нибудь шаблонизатор (Jinja2, Twig и т.д.).
+
+- Cross-Site Scripting (XSS) — внедрение клиентского JS в страницы. Бывает Stored, Reflected, DOM-based.
+
+- Header / Cookie Injection — внедрение вредоносных данных в куки/заголовки (сетевые атаки, сессии).
+</details>
 </details>
