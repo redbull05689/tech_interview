@@ -369,4 +369,14 @@ Explits the users authentificated sessions
 
 - Header / Cookie Injection — внедрение вредоносных данных в куки/заголовки (сетевые атаки, сессии).
 </details>
+
+**Q** Виды SQL Injection
+**A**
+<details> In-band
+- In-band SQLi — данные возвращаются тем же каналом, что и запрос (самый частый).
+  Пример-пейлоад: ' UNION SELECT username, password FROM'
+- out-of-band - когда результаты запроса извлекаются через отдельный канал
+- Error-based — заставляет СУБД выдавать ошибку, содержащую нужную информацию (например, SELECT/CAST с некорректными типами).
+Пример: ' AND 1=CONVERT(int, (SELECT TOP 1 name FROM sysobjects))--
+</details>
 </details>
