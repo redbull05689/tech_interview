@@ -578,4 +578,183 @@ OPA — язык Rego, более гибкий, но сложный.
 ---
 
 </details>
+<details>
+<summary>Calico</summary>
+# 🐆 Calico — Kubernetes Network Security Interview Checklist
+
+## 🔹 Часть 1. Практические вопросы и короткие ответы
+
+**Q** Что такое Calico?
+**A** Calico — это сеть и политика безопасности для Kubernetes, обеспечивающая L3/L4 маршрутизацию, контроль трафика и сетевые политики (NetworkPolicy).
+
+---
+
+**Q** Какие основные функции выполняет Calico?
+**A**
+- Реализует CNI (Container Network Interface) для Kubernetes.
+- Управляет маршрутизацией pod-to-pod.
+- Применяет NetworkPolicies для ограничения сетевого трафика.
+- Поддерживает IPAM, BGP и eBPF.
+
+---
+
+**Q** Что делает Calico IPAM?
+**A** Calico IPAM управляет IP-адресами подов, выделяя их из IP-пулов (`IPPools`) для каждого узла.
+
+---
+
+**Q** Что такое Calico NetworkPolicy?
+**A** Это расширение стандартных Kubernetes NetworkPolicy, поддерживающее дополнительные возможности: правила L3/L4/L7, GlobalPolicy и DNS-based фильтры.
+
+---
+
+**Q** Чем Calico NetworkPolicy отличается от стандартной Kubernetes NetworkPolicy?
+**A**
+- Поддерживает GlobalPolicy (кластерный уровень).
+- Может фильтровать по FQDN/DNS.
+- Имеет действия `Allow`, `Deny`, `Log`, `Pass`.
+- Работает на уровне eBPF без iptables (быстрее).
+
+---
+
+**Q** Что делает Calico GlobalNetworkPolicy?
+**A** Политика, которая применяется ко всем namespace сразу. Используется для глобальных правил безопасности (например, блокировки всего исходящего трафика по умолчанию).
+
+---
+
+**Q** Как включить eBPF dataplane в Calico?
+**A**
+```bash
+calicoctl patch felixconfiguration default --patch '{"spec": {"bpfEnabled": true}}'
+```
+или через Helm-параметр `--set felix.bpfEnabled=true`.
+
+---
+
+**Q** Как запретить все соединения между pod'ами по умолчанию?
+**A** Создать `GlobalNetworkPolicy` с `default deny`:
+```yaml
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: default-deny
+spec:
+  selector: all()
+  types:
+    - Ingress
+    - Egress
+```
+После этого разрешения задаются явно через другие политики.
+
+---
+
+**Q** Как разрешить трафик только между подами одного namespace?
+**A**
+```yaml
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-same-namespace
+spec:
+  selector: all()
+  ingress:
+    - from:
+        - namespaceSelector: "projectcalico.org/name == 'default'"
+```
+
+---
+
+**Q** Как просмотреть активные политики Calico?
+**A**
+```bash
+calicoctl get networkpolicy --all-namespaces
+calicoctl get globalnetworkpolicy
+```
+
+---
+
+**Q** Что делает компонент Felix?
+**A** Felix — агент безопасности Calico на каждом узле, применяет политики, программирует iptables/eBPF и маршруты.
+
+---
+
+**Q** Как Calico использует BGP?
+**A** Для маршрутизации IP-адресов подов между узлами, обеспечивая прямую L3-связность без оверлеев.
+
+---
+
+**Q** Какие есть режимы dataplane у Calico?
+**A**
+1. **iptables** — классический режим (по умолчанию).
+2. **eBPF** — современный, более производительный режим.
+3. **VPP** — для высоконагруженных сетей.
+
+---
+
+**Q** Как интегрировать Calico с Kyverno/OPA для DevSecOps pipeline?
+**A** Kyverno или OPA могут валидировать YAML NetworkPolicies (Policy-as-Code) до деплоя, проверяя наличие ограничений ingress/egress и `default deny` политик.
+
+---
+
+## 🔹 Часть 2. Вопросы “на подумать” (middle/senior уровень)
+
+**Q** Как реализовать Zero Trust сетевую модель с помощью Calico?
+**A** Установить `GlobalNetworkPolicy` с `default deny`, разрешать только конкретные сервисные взаимодействия по namespace/labels.
+
+---
+
+**Q** Как отлаживать трафик, заблокированный политикой Calico?
+**A** Включить `logAction: Log` в политике или смотреть логи Felix (`kubectl logs -n calico-system daemonset/calico-node`).
+
+---
+
+**Q** Как Calico взаимодействует с Cilium или Istio?
+**A** Может работать совместно: Calico управляет L3/L4 политиками, а Istio — L7 (HTTP/TLS). При этом важно синхронизировать правила egress.
+
+---
+
+**Q** Как защитить внешние подключения подов к интернету?
+**A** Использовать egress-политики Calico с ограничением по CIDR или DNS-именам (`destination.selector` или `toServices` в GlobalNetworkPolicy).
+
+---
+
+**Q** Как Calico обрабатывает трафик между узлами разных VPC?
+**A** Через BGP peering или IP-in-IP/ VXLAN encapsulation, в зависимости от конфигурации IPPools.
+
+---
+
+**Q** Как проверить, какая политика применена к поду?
+**A**
+```bash
+calicoctl get policy --selector "projectcalico.org/orchestrator == 'k8s'" -o wide
+```
+
+---
+
+**Q** Как масштабировать Calico при большом количестве подов?
+**A** Использовать eBPF dataplane, уменьшить количество правил, включить `conntrack offload`, и увеличить ресурсы Felix.
+
+---
+
+**Q** Как Calico взаимодействует с kube-proxy?
+**A** В режиме eBPF Calico может **заменять kube-proxy**, обрабатывая сервисный трафик напрямую (ускорение DNS и NAT).
+
+---
+
+**Q** Как проверить состояние Calico кластера?
+**A**
+```bash
+calicoctl node status
+kubectl get pods -n calico-system
+```
+
+---
+
+**Q** Как объединить Calico-политики с DevSecOps-практиками?
+**A** Хранить политики в Git (Policy-as-Code), проверять их через Kyverno/OPA в CI, а применять через GitOps (FluxCD/ArgoCD).
+
+---
+
+
+</details>
 </details>
