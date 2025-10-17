@@ -400,3 +400,182 @@ Explits the users authentificated sessions
 - Self-XSS (само XSS) - жертва сама выполняет вредоносный скрипт в консоли браузера, введясь на социальную инженерию.
 </details>
 </details>
+
+<details>
+<summary>K8S TOOLS</summary>
+<details>
+<summary>Kyverno</summary>
+# 🧩 Kyverno — DevSecOps Interview Checklist
+
+## 🔹 Часть 1. Практические вопросы и короткие ответы
+
+**Q** Что делает Kyverno?
+**A** Policy engine для Kubernetes, описывает политики безопасности в YAML (Policy-as-Code). Проверяет, изменяет и создаёт ресурсы через admission webhook.
+
+---
+
+**Q** Какие типы правил поддерживает Kyverno?
+**A** `validate`, `mutate`, `generate`, `verifyImages`.
+
+---
+
+**Q** Чем отличается `validationFailureAction: audit` от `enforce`?
+**A** `audit` — не блокирует, только пишет в отчёт; `enforce` — блокирует ресурс при нарушении политики.
+
+---
+
+**Q** Как запретить использование `latest` тегов?
+**A**
+```yaml
+pattern:
+  spec:
+    containers:
+      - image: "!*:latest"
+```
+
+---
+
+**Q** Как запретить привилегированные контейнеры?
+**A**
+```yaml
+validate:
+  pattern:
+    spec:
+      containers:
+        - securityContext:
+            privileged: false
+```
+
+---
+
+**Q** Как автоматически добавить `securityContext`, если он не указан?
+**A**
+```yaml
+mutate:
+  patchStrategicMerge:
+    spec:
+      containers:
+        - (name): "*"
+          securityContext:
+            runAsNonRoot: true
+```
+
+---
+
+**Q** Как Kyverno проверяет подписи Docker-образов?
+**A** Через секцию `verifyImages`, сверяя подпись образа с публичным ключом **Cosign**.
+
+---
+
+**Q** Где Kyverno выполняет свои проверки?
+**A** На уровне **Kubernetes Admission Controller** — до создания или обновления ресурса.
+
+---
+
+**Q** Как исключить namespace из проверки?
+**A**
+```yaml
+exclude:
+  any:
+    - resources:
+        namespaces:
+          - kube-system
+```
+
+---
+
+**Q** Как запустить проверку манифестов в CI/CD?
+**A**
+```bash
+kyverno apply policy.yaml --resource deployment.yaml
+```
+
+---
+
+**Q** Что делает `generate` правило?
+**A** Автоматически создаёт ресурсы (например, `NetworkPolicy` или `ConfigMap`) при создании namespace.
+
+---
+
+**Q** Как работает `background: true`?
+**A** Включает периодическую проверку существующих ресурсов — runtime compliance scan.
+
+---
+
+**Q** Как интегрировать Kyverno с FluxCD / ArgoCD?
+**A** Flux/Argo применяют YAML → Kyverno проверяет перед созданием → при нарушении политика блокирует деплой.
+
+---
+
+**Q** Чем Kyverno отличается от OPA Gatekeeper?
+**A** Kyverno — YAML, Kubernetes-native, проще внедрить.
+OPA — язык Rego, более гибкий, но сложный.
+
+---
+
+**Q** Какие политики чаще всего применяют?
+**A**
+- Запрет `privileged` контейнеров
+- Enforce resource limits
+- Запрет `latest` тегов
+- Проверка `runAsNonRoot`
+- Проверка подписей (Cosign)
+- Обязательный `NetworkPolicy`
+- Автогенерация security context
+
+---
+
+## 🔹 Часть 2. Вопросы “на подумать” (middle/senior уровень)
+
+**Q** Как внедрить Kyverno в multi-cluster среду?
+**A** Через Helm или GitOps (FluxCD/ArgoCD) с отдельным набором политик на каждый кластер; можно централизовать политики через Kyverno Policies Repository.
+
+---
+
+**Q** Как исключить проверки только для dev-namespace, но оставить их для prod?
+**A** Использовать `exclude` или `match` с фильтрацией по labels/namespaces, например `match: namespaces: ["prod-*"]`.
+
+---
+
+**Q** Как Kyverno взаимодействует с admission webhook'ами других контроллеров?
+**A** Через цепочку admission контроллеров; важно настроить `failurePolicy` и приоритет (ordering) в манифесте Kyverno.
+
+---
+
+**Q** Как отладить политику, которая не работает как ожидается?
+**A** Проверить через `kyverno-cli apply`, включить `--v=6` для логов, и просмотреть `kubectl logs -n kyverno deploy/kyverno -c kyverno`.
+
+---
+
+**Q** Как оптимизировать Kyverno при большом количестве политик?
+**A** Разбить политики по namespaces, отключить `background` там, где не нужно, и масштабировать deployment (replicas/resources).
+
+---
+
+**Q** Как защитить политики Kyverno от изменений?
+**A** Добавить RBAC-запреты на изменение CRD `ClusterPolicy`, использовать GitOps для контроля изменений.
+
+---
+
+**Q** Как проверить совместимость политики перед деплоем?
+**A** Прогнать `kyverno test` или `kyverno apply` в CI — это валидирует YAML и проверяет его логику без применения в кластере.
+
+---
+
+**Q** Что произойдет, если политика изменилась, а ресурсы уже развернуты?
+**A** При `background: true` Kyverno пересканирует ресурсы и отметит нарушения (или применит mutate/generate при необходимости).
+
+---
+
+**Q** Как связать Kyverno с Trivy и Cosign в цепочке DevSecOps?
+**A** Trivy → сканирует уязвимости, Cosign → подписывает образы, Kyverno → проверяет подписи и политики при деплое (policy gate).
+
+---
+
+**Q** Как реализовать “zero trust” подход с помощью Kyverno?
+**A** Разрешать запуск только подписанных и проверенных образов (`verifyImages`), запретить привилегированные контейнеры и enforce network policies.
+
+---
+
+</details>
+</details>
