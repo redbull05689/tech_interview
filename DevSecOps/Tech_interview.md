@@ -806,6 +806,12 @@ kubectl get pods -n calico-system
 
 ---
 
-
+</details>
+<details>
+<summary>Dcoker analyse tools</summary>
+<details>
+<summary>Dive</summary>
+Инструмент для анализа слоев в docker образе. Похож на Far-manager
+</details>
 </details>
 </details>
