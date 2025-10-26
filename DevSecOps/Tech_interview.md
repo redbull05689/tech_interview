@@ -71,6 +71,8 @@
 
 **CVSS** - Common Vulnerability Scoring System ,шкала от 0 до 10, которая показывает, насколько опасна уязвимость
 
+**RCE** - (Remote code execution) тип уязвимости, которая позволяет выполнять удалкеео произвольный код
+
 **Hardening** -
 </br>
 
@@ -91,11 +93,11 @@
 
 <details>
 <summary>Что я реализовал</summary>
-1. Встраивание SAST и SCA
+1. Встроил в пайплайн SAST, DAST и SCA инструменты
 
 Я добавил SAST Static Application Security Testing (Semgrep, Checkmarx) на ранних этапах пайплайна.
 
-Интеграция Software Composition Analysis (Dependency-Check, Snyk, OWASP Dependency-Track) для поиска уязвимостей в сторонних библиотеках.
+Интеграция Software Composition Analysis (Yara Trivy Clair) для поиска уязвимостей в сторонних библиотеках.
 
 Автоматический fail build при критических уязвимостях.
 
@@ -808,7 +810,7 @@ kubectl get pods -n calico-system
 
 </details>
 <details>
-<summary>Dcoker analyse tools</summary>
+<summary>Docker analyse tools</summary>
 <details>
 <summary>Dive</summary>
 Инструмент для анализа слоев в docker образе. Похож на Far-manager
