@@ -49,6 +49,7 @@
 
 <details>
 <summary>SOC</summary>
+
 | Компонент                                            | Что делает                                                                  |
 | ---------------------------------------------------- | --------------------------------------------------------------------------- |
 | **SIEM** (Security Information and Event Management) | Сбор и корреляция логов (например, Splunk, ELK, Wazuh)                     |
@@ -58,8 +59,8 @@
 | **Incident Response (IR)**                           | Реагирование на инциденты безопасности                                      |
 | **ASOC / Vulnerability Management**                  | Управление уязвимостями из DevSecOps-инструментов (DefectDojo и т.д.)       |
 
-
 </details>
+
 
 **Red Team** - группа специалистов по кибербезопасности, которая имитирует действия злоумышленников для проверки защищённости организации.
 
@@ -395,11 +396,15 @@ Privacy: соблюдение правил конфиденциальности.
 **XSS**
 SOP- same origin policy умправление заголовками (XSS)
 
-**CSRF**
+**CSRF** - подделка межсайтовых запросов
 Cross Site Request Forgery
 Explits the users authentificated sessions
 
 **SQL injection**
+
+**IDOR** — небезопасный прямой доступ к объектам
+
+**RCE** — удалённое выполнение кода
 
 </details>
 
