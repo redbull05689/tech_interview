@@ -862,3 +862,16 @@ kubectl get pods -n calico-system
 </details>
 </details>
 </details>
+
+
+---
+
+</details>
+<details>
+<summary>cheet sheat</summary>
+<details>
+<summary>Trivy</summary>
+Инструмент для анализа слоев в docker образе. Похож на Far-manager
+</details>
+</details>
+</details>
