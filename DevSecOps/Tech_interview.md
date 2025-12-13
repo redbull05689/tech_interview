@@ -897,7 +897,9 @@ sudo apt-get install trivy -y
 ```
 </details>
 <details>
-<summary>OPA</summary>
+<summary>Open policy agent</summary>
+
+
 </details>
 </details>
 </details>
