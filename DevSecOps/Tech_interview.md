@@ -871,7 +871,29 @@ kubectl get pods -n calico-system
 <summary>cheet sheat</summary>
 <details>
 <summary>Trivy</summary>
-Инструмент для анализа слоев в docker образе. Похож на Far-manager
+Generate SBOM </tr>
+```
+# Scan the SBOM file for vulnerabilities
+trivy sbom --format table source-sbom.cdx.json
+# Also produce a JSON report for GitLab integration
+trivy sbom --format json --output source-sbom-report.json source-sbom.cdx.json
+```
+
+Scan docker image:
+```
+docker run --rm -v /tmp/.cache:/root/.cache/ aquasec/trivy:0.17.2 -q image --exit-code 0 --severity CRITICAL --light $dockerImageName
+```
+
+Install
+```
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+
+sudo apt-get update
+sudo apt-get install trivy -y
+```
+
+
 </details>
 </details>
 </details>
