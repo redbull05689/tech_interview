@@ -901,5 +901,10 @@ sudo apt-get install trivy -y
 
 
 </details>
+<details>
+<summary>kubesec</summary>
+smth
+
+</details>
 </details>
 </details>
