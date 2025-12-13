@@ -866,7 +866,6 @@ kubectl get pods -n calico-system
 
 ---
 
-</details>
 <details>
 <summary>cheet sheat</summary>
 <details>
@@ -878,12 +877,16 @@ trivy sbom --format table source-sbom.cdx.json
 # Also produce a JSON report for GitLab integration
 trivy sbom --format json --output source-sbom-report.json source-sbom.cdx.json
 ```
+Scan
+```
+trivy image --format cyclonedx --output $SBOM_IMG_FILE $CI_REGISTRY_IMAGE:$IMAGE_TAG
+trivy image --severity HIGH,CRITICAL --format table --output $TRIVY_OUTPUT $CI_REGISTRY_IMAGE:$IMAGE_TAG
+```
 
 Scan docker image:
 ```
 docker run --rm -v /tmp/.cache:/root/.cache/ aquasec/trivy:0.17.2 -q image --exit-code 0 --severity CRITICAL --light $dockerImageName
 ```
-
 Install
 ```
 wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
@@ -892,8 +895,9 @@ echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main |
 sudo apt-get update
 sudo apt-get install trivy -y
 ```
-
-
+</details>
+<details>
+<summary>OPA</summary>
 </details>
 </details>
 </details>
