@@ -903,7 +903,13 @@ sudo apt-get install trivy -y
 </details>
 <details>
 <summary>kubesec</summary>
-smth
+Kubesec используется для статического анализа безопасности манифестов Kubernetes
+kubesec scan k8s-deployment.yaml
+docker run -d -p 8080:8080 kubesec/kubesec:512c5e0 http 8080
+</details>
+<details>
+<summary>Owasp ZAP</summary>
+
 
 </details>
 </details>
