@@ -1137,7 +1137,25 @@ DNS-резолвинг имени → IP.
  а CA после проверки выпускает сертификат, подписанный своим приватным ключом.<br>
  Это позволяет клиентам доверять, что ключ действительно принадлежит владельцу домена.
 </details>
+<details>
+<summary>Service mesh</summary>
+Service mesh - технология по упралению трафик
+bservability
 
+
+
+<details>
+<summary>Istio</summary>
+Citatdel
+Pilot
+Galey
+
+##mTLS
+- PERMISSIVE Принимает как mTLS, так и обычный (plain text) трафик
+- STRICT Принимает только mTLS, Любой plain text трафик → 403 / connection reset
+- DISABLE mTLS полностью выключен Только plain text
+</details>
+</details>
 <details>
 <summary>Мой последний проект</summary>
 

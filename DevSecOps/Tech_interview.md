@@ -503,7 +503,7 @@ Explits the users authentificated sessions
 <summary>K8S TOOLS</summary>
 <details>
 <summary>Kyverno</summary>
-# 🧩 Kyverno — DevSecOps Interview Checklist
+##Kyverno — DevSecOps Interview Checklist
 
 ## 🔹 Часть 1. Практические вопросы и короткие ответы
 
@@ -675,6 +675,15 @@ OPA — язык Rego, более гибкий, но сложный.
 
 ---
 
+</details>
+<summary>Kube-bench </summary>
+
+kube-bench — приложение на Go, которое проверяет, соответствует ли кластер Kubernetes рекомендациям CIS Kubernetes Benchmark.
+</details>
+
+<summary>Kube-hunter </summary>
+
+От kube-bench утилиты отличается тем, что нацелен на оценку защиты кластера с точки зрения «атакующего».
 </details>
 <details>
 <summary>Calico</summary>
@@ -849,8 +858,10 @@ kubectl get pods -n calico-system
 ---
 
 **Q** Как объединить Calico-политики с DevSecOps-практиками?
-**A** Хранить политики в Git (Policy-as-Code), проверять их через Kyverno/OPA в CI, а применять через GitOps (FluxCD/ArgoCD).
+**A** Хранить политики в Git (Policy-as-Code), проверять их через Kyverno/OPA в CI, а применять через GitOps (FluxCD/ArgoCD).</br>
 
+**Q** CIS (Center for Internet Security)?</br>
+**A** CIS Benchmark, в свою очередь, — это сформулированный список рекомендаций по настройке окружения для защиты от кибератак.
 ---
 
 </details>
@@ -910,7 +921,5 @@ docker run -d -p 8080:8080 kubesec/kubesec:512c5e0 http 8080
 <details>
 <summary>Owasp ZAP</summary>
 
-
-</details>
 </details>
 </details>
