@@ -689,6 +689,7 @@ kube-bench — приложение на Go, которое проверяет, 
 <details>
 <summary>Kube-scan </summary>
 KubeScan предоставляет автоматизированный механизм оценки, позволяющий выявить мисконфигурации и точки риска.
+k8s risk assesment
 </details>
 
 <details>
