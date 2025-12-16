@@ -1150,7 +1150,8 @@ Citatdel
 Pilot
 Galey
 
-##mTLS
+## mTLS
+parameterauth:
 - PERMISSIVE Принимает как mTLS, так и обычный (plain text) трафик
 - STRICT Принимает только mTLS, Любой plain text трафик → 403 / connection reset
 - DISABLE mTLS полностью выключен Только plain text

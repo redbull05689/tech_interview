@@ -676,20 +676,26 @@ OPA — язык Rego, более гибкий, но сложный.
 ---
 
 </details>
+<details>
 <summary>Kube-bench </summary>
 
 kube-bench — приложение на Go, которое проверяет, соответствует ли кластер Kubernetes рекомендациям CIS Kubernetes Benchmark.
 </details>
-
+<details>
 <summary>Kube-hunter </summary>
 
 От kube-bench утилиты отличается тем, что нацелен на оценку защиты кластера с точки зрения «атакующего».
 </details>
 <details>
-<summary>Calico</summary>
-# 🐆 Calico — Kubernetes Network Security Interview Checklist
+<summary>Kube-scan </summary>
+KubeScan предоставляет автоматизированный механизм оценки, позволяющий выявить мисконфигурации и точки риска.
+</details>
 
-## 🔹 Часть 1. Практические вопросы и короткие ответы
+<details>
+<summary>Calico</summary>
+# Calico — Kubernetes Network Security Interview Checklist
+
+## Часть 1. Практические вопросы и короткие ответы
 
 **Q** Что такое Calico?
 **A** Calico — это сеть и политика безопасности для Kubernetes, обеспечивающая L3/L4 маршрутизацию, контроль трафика и сетевые политики (NetworkPolicy).
