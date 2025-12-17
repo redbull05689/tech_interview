@@ -741,7 +741,14 @@ variable "instance_types" {
 - `concat(list1,list2)` — объединение списков
 - `length(list/map/string)` — длина
 
-
+**Q:** как вы управляете конфигурацией зависящей от окружений?<br>
+**A:** Workspaces + переменные (самый популярный базовый вариант)
+├── envs/
+│   ├── dev.tfvars
+│   ├── stage.tfvars
+│   └── prod.tfvars
+terraform workspace select dev
+terraform apply -var-file=envs/dev.tfvars
 
 </details>
 
