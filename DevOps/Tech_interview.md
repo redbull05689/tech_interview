@@ -782,9 +782,14 @@ terraform apply -var-file=envs/dev.tfvars
 
 </details>
 <details>
-<summary>Базы данных</summary>
+<summary>Postgresql</summary>
 
-smth
+**Q:** В чем разница между vaccum и analyze?<br>
+**A:** VACUUM — очищает мёртвые строки после UPDATE/DELETE, предотвращает разрастание таблиц<br>
+ANALYZE — собирает статистику по данным для оптимизации планов запросов.<br>
+
+VACUUM = про место и чистоту данных<br>
+ANALYZE = про скорость выполнения запросов<br>
 
 </details>
 
