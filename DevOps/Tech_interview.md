@@ -788,6 +788,99 @@ ANALYZE — собирает статистику по данным для оп�
 VACUUM = про место и чистоту данных<br>
 ANALYZE = про скорость выполнения запросов<br>
 
+Q: Что такое PostgreSQL и в чем его ключевые особенности?</br>
+A: PostgreSQL — это объектно-реляционная СУБД с открытым исходным кодом. Поддерживает ACID, MVCC, расширения, репликацию, JSON/JSONB, сложные типы данных и высокую расширяемость.
+
+Q: Что такое MVCC в PostgreSQL?</br>
+A: MVCC (Multi-Version Concurrency Control) — механизм, при котором каждая транзакция видит свою версию данных, что позволяет избежать блокировок при чтении и повысить параллелизм.
+
+Q: Чем отличается PostgreSQL от MySQL с точки зрения DevOps?</br>
+A: PostgreSQL строже соблюдает стандарты SQL, имеет более развитую работу с транзакциями, расширениями, планировщиком запросов и репликацией, но требует более тщательной настройки и обслуживания.
+
+🔹 Архитектура и процессы
+
+Q: Из каких основных процессов состоит PostgreSQL?</br>
+A: Основные процессы: postmaster (главный процесс), backend-процессы для клиентов, walwriter, checkpointer, background writer, autovacuum launcher и workers.
+
+Q: Что такое WAL?</br>
+A: WAL (Write-Ahead Log) — журнал предзаписи изменений, обеспечивающий надежность данных и возможность восстановления после сбоев.
+
+Q: Где хранятся данные PostgreSQL?</br>
+A: Данные хранятся в PGDATA (обычно /var/lib/postgresql/...) в виде файлов таблиц, индексов, WAL-сегментов и системных каталогов.
+
+🔹 Репликация и отказоустойчивость
+
+Q: Какие типы репликации поддерживает PostgreSQL?</br>
+A: Физическая (streaming replication) и логическая репликация. Физическая копирует WAL, логическая — изменения на уровне SQL.
+
+Q: Чем отличается синхронная репликация от асинхронной?</br>
+A: При синхронной репликации коммит подтверждается только после записи на реплику, при асинхронной — сразу после записи на мастер.
+
+Q: Как происходит failover в PostgreSQL?</br>
+A: Через promotion реплики в master с помощью pg_ctl promote или инструментов Patroni, repmgr, Pacemaker.
+
+Q: Что такое Patroni?</br>
+A: Patroni — инструмент для автоматического failover и управления PostgreSQL-кластером, использующий distributed lock (etcd/Consul/ZooKeeper).
+
+## Производительность и тюнинг
+
+Q: Какие основные параметры производительности PostgreSQL?</br>
+A: shared_buffers, work_mem, maintenance_work_mem, effective_cache_size, wal_buffers, checkpoint_timeout.
+
+Q: Как найти медленные запросы?</br>
+A: Использовать log_min_duration_statement, pg_stat_statements, EXPLAIN ANALYZE.
+
+Q: Что делает VACUUM?</br>
+A: VACUUM очищает «мертвые» версии строк, освобождая место и предотвращая переполнение транзакционного ID.
+
+Q: Чем VACUUM отличается от AUTOVACUUM?</br>
+A: AUTOVACUUM — автоматический фоновый процесс, VACUUM — ручная операция администратора.
+
+## Бэкапы и восстановление
+
+Q: Какие способы бэкапа PostgreSQL существуют?</br>
+A: Логический (pg_dump), физический (pg_basebackup), PITR с WAL.
+
+Q: Что такое PITR?</br>
+A: Point-In-Time Recovery — восстановление БД на конкретный момент времени с использованием WAL-архивов.
+
+Q: Чем опасен pg_dump для больших БД?</br>
+A: Он создает нагрузку на систему, долго выполняется и плохо масштабируется для очень больших баз.
+
+## Безопасность
+
+Q: Как осуществляется аутентификация в PostgreSQL?</br>
+A: Через pg_hba.conf: password, md5, scram-sha-256, peer, cert, ldap и др.
+
+Q: Что такое SCRAM?</br>
+A: SCRAM-SHA-256 — современный и более безопасный механизм хэширования паролей по сравнению с MD5.
+
+Q: Как ограничить доступ к базе?</br>
+A: Использовать роли, GRANT/REVOKE, сетевые ограничения, SSL и настройки pg_hba.conf.
+
+🔹 Мониторинг и эксплуатация
+
+Q: Какие метрики важно мониторить в PostgreSQL?</br>
+A: CPU, I/O, replication lag, locks, bloat, checkpoints, WAL generation, active connections.
+
+Q: Какие инструменты мониторинга PostgreSQL ты знаешь?</br>
+A: Prometheus + postgres_exporter, Zabbix, Grafana, pgBadger, Percona Monitoring.
+
+Q: Что такое connection pooling и зачем он нужен?</br>
+A: Это ограничение и переиспользование соединений для снижения нагрузки. Обычно используется PgBouncer.
+
+## Docker и Kubernetes
+
+Q: Какие проблемы PostgreSQL в Kubernetes?</br>
+A: Stateful workload, storage, failover, бэкапы, network split-brain.
+
+**Q:** Что значит split-brain в PostgreSQL (и Kubernetes)?</br>
+**A:** Split-brain — это ситуация, когда кластер считает, что существует более одного primary (master), и каждый из них принимает запись, что приводит к рассинхронизации и потере данных.
+
+
+Q: Как обычно запускают PostgreSQL в Kubernetes?</br>
+A: Через StatefulSet, PersistentVolume, operators (CrunchyData, Zalando Postgres Operator).
+
 </details>
 
 <details>
