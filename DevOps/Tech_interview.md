@@ -194,9 +194,6 @@ DNAT (Destination NAT)
 58.
 
 
-
-
-
 </details>
 
 <details>
