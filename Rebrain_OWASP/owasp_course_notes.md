@@ -87,5 +87,10 @@ https://github.com/kkrypt0nn/wordlists
 ```http
 ffuf -u http://<ip>/FUZZ -w /usr/share/wordlists/dirb/common.txt -fc 404
 
+gobuster dir -u http://TARGET -w /usr/share/wordlists/dirb/common.txt
+gobuster dir -u http://TARGET -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 50
+gobuster dir -u http://TARGET -w /usr/share/wordlists/dirb/common.txt -x md
+
+
 ```
 </details>

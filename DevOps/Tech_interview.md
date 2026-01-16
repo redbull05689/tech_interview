@@ -378,14 +378,14 @@ cgroups для распределение или ограничения ресу
 CMD ENTRYPOINT RUN
 CMD sets the command and its parameters to be executed by default after the container is started. However, CMD can be replaced by docker run command line parameters. ENTRYPOINT configures the command to run when the container starts
 
-Инструкции dockerfile:
-FROM
-ENV
-ARG
-WORKDIR
-RUN
-EXPOSE - Никакие порты не открываются, это элемент документирования
-VOLUME - внутри контейнера становится томом. При запуске контейнера Docker автоматически создаст том и примонтирует его к этому пути. Данные, записанные в том(volume), сохранятся даже после остановки или удаления контейнера. Например,VOLUME /data.
+Инструкции dockerfile:</br>
+FROM</br>
+ENV</br>
+ARG</br>
+WORKDIR</br>
+RUN</br>
+EXPOSE - Никакие порты не открываются, это элемент документирования</br>
+VOLUME - внутри контейнера становится томом. При запуске контейнера Docker автоматически создаст том и примонтирует его к этому пути. Данные, записанные в том(volume), сохранятся даже после остановки или удаления контейнера. Например,VOLUME /data.</br>
 
 CMD  явлется как бы дополнением   ENTRYPOINT
 те в Entrypoint мы кладем команду ( python server.py),  а в CMD мы кладем  аргуметы к комманде
