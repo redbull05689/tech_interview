@@ -1113,12 +1113,6 @@ AWS Macie -
 
 
 <details>
-<details>
-<summary>Cloudflare</summary>
-
-smth
-
-</details>
 <summary>Виды тестов</summary>
 виды тестов:
 Юнит-тестирование (Unit Testing):
@@ -1545,5 +1539,11 @@ Pods сидят в private subnet, имеют выход в интернет ч�
 
 **Q:** Какие преимущества Teleport в DevSecOps?<br>
 **A:** Zero Trust, отсутствие секретов, JIT-доступ, полный аудит и соответствие требованиям безопасности.
+
+</details>
+<details>
+<summary>Cloudflare</summary>
+
+smth
 
 </details>
