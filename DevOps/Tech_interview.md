@@ -1452,7 +1452,8 @@ Pods сидят в private subnet, имеют выход в интернет ч�
 Как обеспечиваем доступ: kubectl через bastion или через AWS SSM Session Manager, а не открытый 22 порт.
 </details>
 
-
+<details>
+<summary>Keycloak</summary>
 ## Keycloak — топ вопросов и ответов
 
 **Q:** Что такое Keycloak?<br>
@@ -1494,8 +1495,10 @@ Pods сидят в private subnet, имеют выход в интернет ч�
 **Q:** Как масштабировать Keycloak?<br>
 **A:** С помощью stateless-нод, внешней БД, Infinispan и балансировщика нагрузки.
 
----
+</details>
 
+<details>
+<summary>Teleport</summary>
 ## Teleport — топ вопросов и ответов
 
 **Q:** Что такое Teleport?<br>
@@ -1543,4 +1546,4 @@ Pods сидят в private subnet, имеют выход в интернет ч�
 **Q:** Какие преимущества Teleport в DevSecOps?<br>
 **A:** Zero Trust, отсутствие секретов, JIT-доступ, полный аудит и соответствие требованиям безопасности.
 
-
+</details>
