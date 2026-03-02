@@ -461,20 +461,11 @@ Explits the users authentificated sessions
 <summary>Attacks</summary>
 
 **Q:** Какие виды инъекций знаете? </br>
-**А:** XSS, SQLi, NOSQLi, command/os injection
+**А:** Blind, UNION based, Error bases
 <details>
 <summary>Виды инъекций</summary>
-- SQL Injection(SQLi) - внедрение SQL-кода к базе
 
-- NoSQL injection- инъекции для NoSQL БД (MongoDB).
 
-- Command/OS injection - выполнение команд операционной системы через вызовы (например, system() / exec).
-
-- Server-Side Template Injection (SSTI) — внедрение кода в какой-нибудь шаблонизатор (Jinja2, Twig и т.д.).
-
-- Cross-Site Scripting (XSS) — внедрение клиентского JS в страницы. Бывает Stored, Reflected, DOM-based.
-
-- Header / Cookie Injection — внедрение вредоносных данных в куки/заголовки (сетевые атаки, сессии).
 </details>
 
 **Q** Виды SQL Injection
